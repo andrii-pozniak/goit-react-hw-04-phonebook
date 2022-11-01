@@ -1,19 +1,13 @@
 import React, {Component} from 'react';
 import { nanoid } from 'nanoid';
-import { TitlePage } from "../TitlePage/TitlePage";
 import { StyleForm, StyleLabel, StyleButton, StyleInput} from "./Form.Styled";
 // import { Page } from "components/Page/page";
-
-
-
-
 
 export  class Form extends Component {
     state = {        
         name: '',
         number: '',
-       
-    }
+          }
    
     handleChange = evt => {
         this.setState({
@@ -25,8 +19,7 @@ export  class Form extends Component {
     handleSubmit = evt => {
         evt.preventDefault()
         this.props.onSubmit(this.state) 
-        // this.props.onSubmit(this.state.number) 
-        // console.log(this.state.name)   
+         
         this.reset();        
     }
     reset = () => {
@@ -41,7 +34,7 @@ export  class Form extends Component {
         
         return (
            <>
-           <TitlePage>Phonebook</TitlePage>
+           <h1>Phonebook</h1>
             <StyleForm onSubmit={this.handleSubmit}>
                 
                 <StyleLabel htmlFor={this.nameInputId}> Name </StyleLabel>
@@ -68,7 +61,7 @@ export  class Form extends Component {
 />
                 <StyleButton type='submit'>Add contact</StyleButton>
             </StyleForm>
-            <TitlePage>Contacts</TitlePage>
+            <h2>Contacts</h2>
            
            </>
                        

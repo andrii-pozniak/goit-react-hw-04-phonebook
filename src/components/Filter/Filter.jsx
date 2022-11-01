@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import { StyleLabel, StyleInput} from "./Filter.Style"
 
 
@@ -8,6 +10,11 @@ export const Filter = ({value, onChange}) => (
     
     </>
   
-)
+);
+
+Filter.prototypes = {
+  value: PropTypes.string.isRequired, 
+  onChange: PropTypes.node.isRequired,
+}
     
    
