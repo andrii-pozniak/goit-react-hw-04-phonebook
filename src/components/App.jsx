@@ -48,8 +48,8 @@ addContact = contact => {
 
 render (){
   const {contacts, filter} = this.state;
-  const visibleContact = this.state.contacts.filter(contact => 
-    contacts.contact.toLowerCase )
+  // const visibleContact = this.state.contacts.filter(contact => 
+  //   contacts.contact.toLowerCase )
 
   return (
     <StyleContainer>
