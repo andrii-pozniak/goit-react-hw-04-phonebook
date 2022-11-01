@@ -21,7 +21,7 @@ export class App extends Component {
     ],
     filter: '',
     name: '',
-    number: ''
+    number: '',
     
 }
 

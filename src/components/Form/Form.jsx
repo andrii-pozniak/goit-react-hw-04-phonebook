@@ -12,8 +12,7 @@ export  class Form extends Component {
     handleChange = evt => {
         this.setState({
             [evt.currentTarget.name]: evt.currentTarget.value,
-            id: nanoid()});
-       
+            id: nanoid()});       
     }
    
     handleSubmit = evt => {
