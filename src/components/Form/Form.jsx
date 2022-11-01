@@ -11,25 +11,29 @@ import { StyleForm, StyleLabel, StyleButton, StyleInput} from "./Form.Styled";
 export  class Form extends Component {
     state = {        
         name: '',
-
-        id: ''
+        number: '',
+       
     }
    
     handleChange = evt => {
-        this.setState({name: evt.currentTarget.value,
-            id: this.nameInputId});
+        this.setState({
+            [evt.currentTarget.name]: evt.currentTarget.value,
+            id: nanoid()});
        
     }
    
     handleSubmit = evt => {
         evt.preventDefault()
-        this.props.onSubmit(this.state.name)     
+        this.props.onSubmit(this.state) 
+        // this.props.onSubmit(this.state.number) 
+        // console.log(this.state.name)   
         this.reset();        
     }
     reset = () => {
         this.setState({
             name: '',
-            id: ''
+            number: '',
+          
         })
     }
     nameInputId = nanoid();
@@ -47,7 +51,7 @@ export  class Form extends Component {
                     pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
                     title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
                     required
-                    id={this.nameInputId}
+                    // id={this.nameInputId}
                     value={this.state.name} 
                     onChange={this.handleChange}
                     />
@@ -58,6 +62,9 @@ export  class Form extends Component {
                     pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
                     title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
                     required
+                    // id={this.nameInputId}
+                    value={this.state.number} 
+                    onChange={this.handleChange}
 />
                 <StyleButton type='submit'>Add contact</StyleButton>
             </StyleForm>
