@@ -56,6 +56,21 @@ addContact = contact => {
    console.log(contact,)
 };
 
+componentDidUpdate(prevProps, prevState) {
+if (this.state.contacts !== prevState) {
+  localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+}
+};
+
+componentDidMount() {
+  const contacts = localStorage.getItem('contacts');
+  const parsedContact = JSON.parse(contacts);
+ if(parsedContact){
+  this.setState({contacts: parsedContact});
+ }
+
+}
+
 render (){
   const {filter} = this.state;
   const visibleContact = this.getVisibleContact();
