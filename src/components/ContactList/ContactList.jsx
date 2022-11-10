@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { StyleItem, StyleButton, StylePage } from "./ContactList.style";
 
-
 export const ContactList = ({contacts, onDeleteContact}) => {
     // console.log(contacts)
     return <ul> 
