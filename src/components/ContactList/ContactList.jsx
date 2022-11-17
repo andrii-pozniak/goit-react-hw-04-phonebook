@@ -1,9 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { StyleItem, StyleButton, StylePage } from "./ContactList.style";
 
 export const ContactList = ({contacts, onDeleteContact}) => {
-    // console.log(contacts)
+    console.log(contacts)
     return <ul> 
       {contacts.map(({ name, number, id}) => (
          <StyleItem key={id}>
@@ -16,7 +16,7 @@ export const ContactList = ({contacts, onDeleteContact}) => {
     </ul>
 };
 
-ContactList.propTypes = {
-   contacts: PropTypes.array.isRequired,
+// ContactList.propTypes = {
+//    contacts: PropTypes.array.isRequired,
     
-}
+// }
