@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import { nanoid } from 'nanoid';
 import Form  from "./Form/Form";
@@ -13,15 +13,16 @@ padding-bottom:${p => p.theme.space[5]}px;
 `;
 
 export default function APP() {
-  const [contacts, setContacts] = useState(
-    // {id: 'id-1', name: 'Rosie Simpson', number: '459-12-56'},
-   [ {id: 'id-2', name: 'Hermione Kline', number: '443-89-12'},
+  const contact = window.localStorage.getItem('contacts');
+  const parsedContact = JSON.parse(contact);
+  // console.log(parsedContact)
+  const [contacts, setContacts] = useState(() => {return parsedContact  ?? 
+   [ {id: 'id-1', name: 'Rosie Simpson', number: '459-12-56'},
+    {id: 'id-2', name: 'Hermione Kline', number: '443-89-12'},
     {id: 'id-3', name: 'Eden Clements', number: '645-17-79'},
-    {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'},]);
+    {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'}]});
     const [filter, setFilter] = useState('');
-    // const [name, setName] = useState('');
-    // const [number, setNumber] = useState('');
-
+    
     const changeFilter = evt => {
       setFilter (evt.currentTarget.value)
     };
@@ -29,29 +30,62 @@ export default function APP() {
     const getVisibleContact = () => {
      
       const normalizedFilter = filter.toLowerCase(); 
-      console.log(contacts)
-      console.log(contacts.name)
+      // console.log(contacts)
+      // console.log(contacts.name)
       return  contacts.filter(contact => 
         contact.name.toLowerCase().includes(normalizedFilter));
     
      };
 
      const deleteContact = contactId => {
-      setContacts(prevState => ({
-          contacts: prevState.contacts.filter(contact =>
-              contact.id !==  contactId ),   
-          }));
+      console.log(contactId)
+      console.log(contact.id)
+
+      setContacts(() => (
+        
+        contacts.filter(contact =>
+          contact.id !==  contactId )), 
+      
+        
+           
+          );
 
         }
         const addContact = contact => {
           
-            console.log(contact)
+            // console.log(contact)
             if(contacts.some(el => el.name === contact.name)) {
               return alert('Contact already exist')
            }
-           setContacts(() => ({contacts: [...contacts, {id: nanoid(4), ...contact}]}))
+           setContacts(prevContact => ([...prevContact, {id: nanoid(4), ...contact}]))
              console.log(setContacts)
-          };
+
+            };
+            useEffect(() => {
+              if (contacts !== setContacts) {
+                // console.log(contacts);
+                // console.log(setContacts)
+                window.localStorage.setItem('contacts', JSON.stringify(contacts));
+                }}, [contacts]) ;
+
+                useEffect(() => {
+                  const contacts = window.localStorage.getItem('contacts');
+                    const parsedContact = JSON.parse(contacts);
+                    // console.log(parsedContact)
+                 
+                    setContacts(parsedContact);
+                    
+                  }, []) ;     
+
+          // useEffect(() => {
+          //   if (contacts !== prevContact) {
+          //       localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+          //     }
+          //   window.localStorage.setItem('name', JSON.stringify(name));
+          // }, [name]) ;
+          // useEffect(() => {
+          //   window.localStorage.setItem('number', JSON.stringify(number));
+          // }, [number]) 
 
           const visibleContact = getVisibleContact();
     return (
@@ -62,7 +96,8 @@ export default function APP() {
       </StyleContainer>
       
     );
-}
+};
+
 
 
 // export const App = () => {

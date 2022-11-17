@@ -4,23 +4,31 @@ import { StyleForm, StyleLabel, StyleButton, StyleInput} from "./Form.Styled";
 // import { Page } from "components/Page/page";
 
 export  default function Form({onSubmit}) {
-    const [name, setName] = useState('');
-    const [number, setNumber] = useState('');
+    const [name, setName] = useState();
+    const [number, setNumber] = useState();
 
-    const handleChangeName = evt => {
-        
-            setName(evt.target.value)
-            return name;
-    } 
-    const handleChangeNumber = evt => {
-        
-        
-                    setNumber(evt.target.value)
-                        
-          return number;    
-        // setName( evt.target.value,
-        //    );       
+
+    const handleChange = evt => {
+        const {name, value} = evt.target
+        switch(name) {
+            case `name`:
+                setName(value)  
+                break;
+            case `number`:
+                setNumber(value)  
+                break;   
+                default:
+                return;
+
+        }
     }
+    // useEffect(() => {
+    //     window.localStorage.setItem('name', JSON.stringify(name));
+    //   }, [name]) ;
+    //   useEffect(() => {
+    //     window.localStorage.setItem('number', JSON.stringify(number));
+    //   }, [number]) 
+
     const handleSubmit = evt => {
         evt.preventDefault()
        onSubmit({name, number}) 
@@ -32,6 +40,15 @@ export  default function Form({onSubmit}) {
         setNumber('')
         
         }
+
+        {
+            //   const contacts = localStorage.getItem('contacts');
+            //   const parsedContact = JSON.parse(contacts);
+            //  if(parsedContact){
+            //   this.setState({contacts: parsedContact});
+            //  }
+            
+            // }
 
         const  nameInputId = nanoid();
     return (
@@ -48,7 +65,7 @@ export  default function Form({onSubmit}) {
                  required
                  // id={this.nameInputId}
                  value={name} 
-                 onChange={handleChangeName}
+                 onChange={handleChange}
                  />
              <StyleLabel htmlFor={nameInputId}> Number </StyleLabel>
                  <StyleInput
@@ -59,7 +76,7 @@ export  default function Form({onSubmit}) {
                  required
                  // id={this.nameInputId}
                  value={number} 
-                 onChange={handleChangeNumber}
+                 onChange={handleChange}
 />
              <StyleButton type='submit'>Add contact</StyleButton>
          </StyleForm>
@@ -70,6 +87,7 @@ export  default function Form({onSubmit}) {
      )
     
 } 
+}
 //  {
 //     state = {        
 //         name: '',
